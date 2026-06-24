@@ -1,1 +1,1 @@
-# LatticeCalendar-
+# LatticeCalendar
