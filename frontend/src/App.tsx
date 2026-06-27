@@ -1,10 +1,11 @@
-function App() {
+import Navbar from './components/Navbar'
+import Router from './Router'
 
+export default function App() {
   return (
     <>
-      <div>Hello</div>
+      <Navbar />
+      <Router />
     </>
   )
 }
-
-export default App
