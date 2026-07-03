@@ -20,7 +20,7 @@ export default function Navbar() {
             }`
           }
         >
-          Login
+          Sign In
         </NavLink>
       </div>
     </nav>
