@@ -50,13 +50,10 @@ INSTALLED_APPS = [
     "api",
     "authentication",
     'django.contrib.sites',      
-    'rest_framework.authtoken',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',  
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -76,11 +73,11 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173'
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "config.urls"
 
@@ -154,14 +151,16 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 # Cookie Set-up
-SESSION_COOKIE_SAMESITE = "None"
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = "None"
-CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE = "Lax"
 
 SITE_ID = 1
 
 # Social Account Connection
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
@@ -179,23 +178,14 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+
 # Rest Framework
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
     ],
-}
-
-# Rest Auth
-REST_AUTH = {
-    'USE_JWT': True,
-    'JWT_AUTH_COOKIE': 'access',           # Cookie name for the access token
-    'JWT_AUTH_REFRESH_COOKIE': 'refresh',  # Cookie name for the refresh token
-    'JWT_AUTH_HTTPONLY': True,             # Prevents JS from reading the cookie
-}
-
-# Simple JWT
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
 }
