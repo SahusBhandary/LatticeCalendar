@@ -161,6 +161,9 @@ SITE_ID = 1
 # Social Account Connection
 SOCIALACCOUNT_AUTO_SIGNUP = True
 
+# User Auth Model
+AUTH_USER_MODEL = "authentication.User"
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
